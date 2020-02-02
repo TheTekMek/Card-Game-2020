@@ -26,7 +26,6 @@ public class Deck {
 		List<Card> cardList = Arrays.asList(cards);
 		Collections.shuffle(cardList);
 		cardList.toArray(cards);
-		System.out.println("Cards after shuffle: " + cardList);
 	}
 	
 	public Card draw() {

@@ -5,14 +5,23 @@ import java.util.Arrays;
 import cards.*;
 
 public class Game {
-	Deck cardDeck = new Deck();
+	Deck cardDeck;
 	
+	Game() {
+		initGame();
+	}
+
+	private void initGame() {
+		this.cardDeck = new Deck();
+		shuffleDeck();
+		printCards();
+	}
+
 	public void shuffleDeck() {
 		cardDeck.shuffle();
 	}
 	
 	public void printCards() {
-		System.out.println("Cards before shuffle: " + Arrays.toString(cardDeck.cards));		
+		System.out.println(Arrays.toString(cardDeck.cards));		
 	}
-//	cardDeck.shuffle();
 }
