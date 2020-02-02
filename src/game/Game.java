@@ -7,6 +7,10 @@ import cards.*;
 public class Game {
 	Deck cardDeck = new Deck();
 	
+	public void shuffleDeck() {
+		cardDeck.shuffle();
+	}
+	
 	public void printCards() {
 		System.out.println("Cards before shuffle: " + Arrays.toString(cardDeck.cards));		
 	}
