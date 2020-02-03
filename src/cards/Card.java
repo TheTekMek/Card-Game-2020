@@ -1,7 +1,5 @@
 package cards;
 
-import java.lang.*;
-
 public class Card {
 	public CardSuit suit;
 	public CardFace face;

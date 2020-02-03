@@ -1,11 +1,9 @@
 package cards;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Collections;
+import java.util.*;
 
 public class Deck {
-	public Card[] cards = new Card[52];
+	public List<Card> cards = new ArrayList<Card>();
 	
 	public Deck() {
 		initializeCards();
@@ -16,19 +14,27 @@ public class Deck {
 		
 		for (CardSuit suit : CardSuit.values()) {
 			for (CardFace face : CardFace.values()) {
-				cards[arrIndex] = new Card(suit, face);
+				cards.add(new Card(suit, face));
 				arrIndex++;
 			}
 		}
 	}
 	
 	public void shuffle() {
-		List<Card> cardList = Arrays.asList(cards);
-		Collections.shuffle(cardList);
-		cardList.toArray(cards);
+		Collections.shuffle(cards);
 	}
 	
 	public Card draw() {
-		return cards[0];
+		return cards.get(0);
+	}
+	
+	public List<Card> draw(int quantity) {
+		List<Card> hand = new ArrayList<Card>();
+
+		for (int i = 0; i < quantity; i++) {
+			hand.add(cards.get(0));
+		}
+
+		return hand;
 	}
 }
