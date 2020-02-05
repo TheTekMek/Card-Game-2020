@@ -4,10 +4,38 @@ import java.util.*;
 import cards.*;
 
 public class Player {
-    String playerName;
-    List<Card> hand;
-    String id;
-    int score = 0;
+    private String playerName;
+    private List<Card> hand;
+    private String id;
+    private int score = 0;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public List<Card> getPlayerHand() {
+        return hand;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setPlayerName(String name) {
+        playerName = name;
+    }
+
+    public void increaseScore() {
+        score += 2;
+    } 
+    
+    public void decreaseScore() {
+        score--;
+    } 
 
     public Player(String name) {
         this.playerName = name;
@@ -15,14 +43,10 @@ public class Player {
         this.hand = new ArrayList<Card>();
     }
 
-    public void draw(Card card) {
-        this.hand.add(card);
+    public void pullCard(Card card) {
+        hand.add(card);
     }
-
-    // public void draw(List<Card> cards) {
-    //     this.hand.addAll(cards);
-    // }
-
+    
     @Override
 	public String toString() {
         return "\n---------------------------------------------------------------------------------------------" +
