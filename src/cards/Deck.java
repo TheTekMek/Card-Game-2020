@@ -1,6 +1,8 @@
 package cards;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;;
 
 public class Deck {
 	public List<Card> cards = new ArrayList<Card>();
@@ -10,12 +12,10 @@ public class Deck {
 	}
 	
 	private void initializeCards() {
-		int arrIndex = 0;
-		
 		for (CardSuit suit : CardSuit.values()) {
 			for (CardFace face : CardFace.values()) {
-				cards.add(new Card(suit, face));
-				arrIndex++;
+				if (face == CardFace.PENALTY) cards.add(new Card(null, face));
+				else cards.add(new Card(suit, face));
 			}
 		}
 	}
@@ -25,7 +25,7 @@ public class Deck {
 	}
 	
 	public Card draw() {
-		return cards.get(0);
+		return cards.remove(0);
 	}
 	
 	public List<Card> draw(int quantity) {
