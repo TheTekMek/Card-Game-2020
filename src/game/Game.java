@@ -23,6 +23,8 @@ public class Game {
 		Scanner nameInput = new Scanner(System.in);
 		Scanner drawInput = new Scanner(System.in);
 		int numberOfPlayers;
+		int turnCount = 1;
+		int highScore = 0;
 
 		try {
 			numberOfPlayers = input.nextInt();
@@ -48,8 +50,6 @@ public class Game {
 
 		initDeck();
 		
-		int turnCount = 1;
-		int highScore = 0;
 		
 		while (!cardDeck.cards.isEmpty() || gameWinner == null) {
 			List<Card> activeCards = new ArrayList<Card>();
@@ -102,10 +102,6 @@ public class Game {
 		input.close();
 		nameInput.close();
 		drawInput.close();
-
-		System.out.println(Arrays.toString(this.players));
-
-		dealCards();
 	}
 
 	private void displayMessage(String message) {
