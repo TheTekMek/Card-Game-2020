@@ -52,11 +52,13 @@ public class Game {
 		
 		
 		while (gameWinner == null) {
+			// Cards that were drawn in a round
 			List<Card> activeCards = new ArrayList<Card>();
 			
 			displayMessage("This is turn number " + turnCount);
 			shuffleDeck();
 
+			// Draw cards
 			for (int i = 0; i < this.players.length; i++) {
 				Player activePlayer = this.players[i];
 
@@ -75,6 +77,7 @@ public class Game {
 
 			printCardStack(activeCards);
 			
+			// Sort to find the highest card drawn
 			try {
 				declareRoundWinner(activeCards);
 				
@@ -82,6 +85,7 @@ public class Game {
 				displayMessage(e.getMessage());
 			}
 			
+			// Give points to player with highest drawn card & penalize penalty card holders
 			for (Player player : players) {
 				Card turnCard = null;
 				
@@ -97,9 +101,12 @@ public class Game {
 			
 			turnCount++;
 
-			declareGameWinner();
+			returnCardsToDeck(activeCards);
 
 			printPlayerInfo();
+			
+			// Check if we have a game winner
+			declareGameWinner();
 		}
 
 		displayMessage("And the WINNER of the game is " + gameWinner.getPlayerName() + " with a final score of " + gameWinner.getScore());
@@ -115,16 +122,6 @@ public class Game {
 
 	private void initDeck() {
 		this.cardDeck = new Deck();
-	}
-	
-	private void dealCards() {
-		int numPlayers = this.players.length;
-		
-		shuffleDeck();
-		
-		for (int i = 0; i < numPlayers; i++) {
-			players[i].pullCard(cardDeck.draw());	
-		}
 	}
 
 	private void declareRoundWinner(List<Card> cards) throws DuplicateCardsException {
@@ -170,15 +167,19 @@ public class Game {
 		}
 	}
 
-	public void shuffleDeck() {
+	private void returnCardsToDeck(List<Card> cards) {
+		cardDeck.cards.addAll(cards);
+	}
+
+	private void shuffleDeck() {
 		cardDeck.shuffle();
 	}
 	
-	public void printCardStack(List<Card> cards) {
+	private void printCardStack(List<Card> cards) {
 		System.out.println(Arrays.toString(cards.toArray()));		
 	}
 
-	public void printPlayerInfo() {
+	private void printPlayerInfo() {
 		System.out.println(Arrays.toString(players));
 	}
 }
