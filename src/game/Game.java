@@ -18,11 +18,6 @@ public class Game {
 	Player gameWinner;
 	
 	public Game() {
-		
-		// private void initPlayers() {
-
-		// }
-
 		displayMessage("How many players will be in this game (2 to 4 players)?");
 		Scanner input = new Scanner(System.in);
 		Scanner nameInput = new Scanner(System.in);
@@ -33,8 +28,6 @@ public class Game {
 			numberOfPlayers = input.nextInt();
 		} catch (InputMismatchException e) {
 			e.toString();
-			// displayMessage("You must enter a number, between 2 to 4");
-			// numberOfPlayers = input.nextInt();
 			displayMessage("You will default to a 2 player game");
 			numberOfPlayers = 2;
 		}
@@ -95,7 +88,7 @@ public class Game {
 				for (Card cd : activeCards) {
 					if (turnCard == null && cd.getPlayerId() == player.getId()) {
 						turnCard = cd;
-					} // else break;
+					}
 				}
 				
 				if (turnCard.getRoundWinner()) player.increaseScore();
@@ -111,10 +104,8 @@ public class Game {
 		drawInput.close();
 
 		System.out.println(Arrays.toString(this.players));
-		// Initialize card deck 
 
 		dealCards();
-		
 	}
 
 	private void displayMessage(String message) {
