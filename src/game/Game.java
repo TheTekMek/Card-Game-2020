@@ -15,9 +15,9 @@ import players.*;
 public class Game {
 	Deck cardDeck;
 	Player[] players;
-	Player gameWinner;
-	
-	public Game() {
+	Player gameWinner = null;
+
+	public void runGame() {
 		displayMessage("How many players will be in this game (2 to 4 players)?");
 		Scanner input = new Scanner(System.in);
 		Scanner nameInput = new Scanner(System.in);
@@ -51,7 +51,7 @@ public class Game {
 		initDeck();
 		
 		
-		while (!cardDeck.cards.isEmpty() || gameWinner == null) {
+		while (gameWinner == null) {
 			List<Card> activeCards = new ArrayList<Card>();
 			
 			displayMessage("This is turn number " + turnCount);
@@ -96,8 +96,13 @@ public class Game {
 			}
 			
 			turnCount++;
+
+			declareGameWinner();
+
 			printPlayerInfo();
 		}
+
+		displayMessage("And the WINNER of the game is " + gameWinner.getPlayerName() + " with a final score of " + gameWinner.getScore());
 
 		input.close();
 		nameInput.close();
@@ -139,6 +144,30 @@ public class Game {
 		}
 
 		if (!cards.get(winningIndex).getPenaltyCard()) cards.get(winningIndex).setRoundWinner();
+	}
+
+	private void declareGameWinner() {
+		final Comparator<Player> scoreComparator = new PlayerScoreComparator();
+		List<Player> playerList = new ArrayList<Player>();
+		Player highScorer;
+
+		for (Player pl : players) {
+			playerList.add(pl);
+		}
+
+		for (int i = 0; i < playerList.size() - 1; i++) {
+			for (int j = i + 1; j > 0; j--) {
+				if (scoreComparator.compare(playerList.get(j), playerList.get(j-1)) < 0) Collections.swap(playerList, j, j-1);
+				// else if (scoreComparator.compare(players.get(j), players.get(j-1)) == 0)
+			}
+		}
+
+		highScorer = playerList.get(playerList.size()-1);
+
+		if (highScorer.getScore() >= 21) {
+			if (highScorer.getScore() - playerList.get(playerList.size()-2).getScore() >= 2)
+				gameWinner = highScorer;
+		}
 	}
 
 	public void shuffleDeck() {

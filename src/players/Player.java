@@ -6,7 +6,7 @@ import cards.*;
 public class Player {
     private String playerName;
     private List<Card> hand;
-    private String id;
+    private final String id;
     private int score = 0;
 
     public String getPlayerName() {
@@ -46,7 +46,7 @@ public class Player {
     public void pullCard(Card card) {
         hand.add(card);
     }
-    
+
     @Override
 	public String toString() {
         return "\n---------------------------------------------------------------------------------------------" +
